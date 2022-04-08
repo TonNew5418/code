@@ -3,25 +3,27 @@ import cv2
 from IPython.display import Image, display
 from detect1 import detect
 
-def _test(img_name):
-    # 获取路径
-    img_path = os.path.join('images', img_name)
-    save_path = os.path.join('outputs', img_name)
+def _test(images_path, outputs_path):
+    images_name = os.listdir(images_path)
+    for image_name in images_name:
+        img_path = os.path.join(images_path, image_name)
+        save_path = os.path.join(outputs_path, (image_name.split('.')[0] + '.jpg'))
 
-    # 读取图像
-    img = cv2.imread(img_path)
+        try:
+            img = cv2.imread(img_path)
 
-    # 图像检测
-    r, x, y = (int(x) for x in detect(img))
+            # 图像检测
+            r, x, y = (int(x) for x in detect(img))
 
-    # 绘制结果
-    cv2.circle(img, (x, y), 3, (225, 0, 0), 5)
-    cv2.circle(img, (x, y), r, (225, 0, 0), 3)
+            # 绘制结果
+            cv2.circle(img, (x, y), 3, (225, 0, 0), 5)
+            cv2.circle(img, (x, y), r, (225, 0, 0), 3)
 
-    # 保存并显示
-    cv2.imwrite(save_path, img)
-    display(Image(save_path))
+            # 保存并显示
+            cv2.imwrite(save_path, img)
+            display(Image(save_path))
+        except Exception as e:
+            print(e)
 
 if __name__ == '__main__':
-    for i in range(1, 6):
-        _test(str(i) + '.png')
+    _test('./images/20', './outputs')
