@@ -14,7 +14,10 @@ def detect(readimg):
     # 图像腐蚀 去除一些干扰小区域 只保留最大的绿色板
     kernel = np.ones((5, 5), np.uint8)
     mask = cv2.erode(mask, kernel)
-
+    ########
+    opened_green = cv2.morphologyEx(mask, cv2.MORPH_OPEN, np.ones((3, 3), np.uint8))  # 开运算 去噪点
+    closed_green = cv2.morphologyEx(opened_green, cv2.MORPH_CLOSE, np.ones((3, 3), np.uint8))  # 闭运算 封闭连接
+    ######## 后面可以把closed_green 当作mask用
     # 获取坐标和长度
     index_x = np.where(mask.sum(0) > 0)[0]
     index_y = np.where(mask.sum(1) > 0)[0]
