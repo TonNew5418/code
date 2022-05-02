@@ -7,9 +7,11 @@ def detect(readimg):
     hsv = cv2.cvtColor(readimg, cv2.COLOR_BGR2HSV)
 
     # 通过 HSV 对应的绿色色彩区间对绿色部分进行提取
-    lower = np.array([80, 43, 46])
+    lower = np.array([60, 43, 46])
     upper = np.array([95, 255, 255])
     mask = cv2.inRange(hsv, lower, upper)
+    # cv2.imshow('1', mask)
+    # cv2.waitKey()
 
     # 图像腐蚀 去除一些干扰小区域 只保留最大的绿色板
     kernel = np.ones((5, 5), np.uint8)
