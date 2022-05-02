@@ -2,14 +2,23 @@ import cv2
 
 
 def detect(readimg):
-    # canny 边缘检测
-    canny = cv2.Canny(readimg, 40, 80)
+    readimg = cv2.cvtColor(readimg, cv2.COLOR_BGR2GRAY)
+    readimg = readimg[:, 80:560]
+    readimg = cv2.GaussianBlur(readimg, (5, 5), sigmaX=0)
 
-    # 圆形检测
-    circles = cv2.HoughCircles(
-        canny, cv2.HOUGH_GRADIENT, 1, 30, param1=50, param2=30, minRadius=10, maxRadius=28)
 
-    if circles is None:
-        return 0, 0, 0
+
+    readimg = cv2.Canny(readimg, 80, 140)
+
+
+    # cv2.imshow('1', readimg)
+    # cv2.waitKey()
+
+
+    circles = cv2.HoughCircles(readimg, cv2.HOUGH_GRADIENT, 1, 50, param1=50, param2=23, minRadius=15, maxRadius=25)
+
+    if circles is not None:
+        return circles[0, 0, 2], circles[0, 0, 0] + 80, circles[0, 0, 1]
     else:
-        return circles[0, 0, 2], circles[0, 0, 0], circles[0, 0, 1]
+        return 0, 0, 0
+    
