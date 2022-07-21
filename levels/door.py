@@ -11,14 +11,8 @@ def start_door(width, height, org_img, color_dict):
     SSR.serial_setServo(20, 500, 500)
     door_count = 0
     no_door_count = 0
-    if level == 1:
-        print('进入start_door')
 
-    else:
-        # SSR.change_action_value("1",10)  # 静止
-        time.sleep(0.5)
-        return
-    while level == 1:
+    while True:
         t1 = cv2.getTickCount()
         border = cv2.copyMakeBorder(org_img, 12, 12, 16, 16, borderType=cv2.BORDER_CONSTANT,
                                     value=(255, 255, 255))  # 扩展白边，防止边界无法识别

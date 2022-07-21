@@ -70,8 +70,7 @@ def main():
     # SSR.start_action_thread()
 
     # 第一关
-    door.start_door(width=320, height=240,
-                    org_img=copy.deepcopy(org_img), level=copy.deepcopy(level), color_dict=color_dict)
+    door.start_door(width=320, height=240)
 
 
 if __name__ == "__main__":
