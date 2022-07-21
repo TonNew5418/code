@@ -7,3 +7,4 @@ import CalibrationConfig
 import CollectCalibrationPicture
 import GenerateCalibrationPlate
 import TestCalibration
+import numpy
