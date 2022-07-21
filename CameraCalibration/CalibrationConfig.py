@@ -2,7 +2,7 @@
 calibration_size = (8, 6)
 
 #采集标定图像存储路径
-save_path = '/home/pi/CameraCalibration/calibration_images/'
+save_path = './CameraCalibration/calibration_images'
 
 #标定参数存储路径
-calibration_param_path = '/home/pi/CameraCalibration/calibration_param'
+calibration_param_path = './CameraCalibration/calibration_param'

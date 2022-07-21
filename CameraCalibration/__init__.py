@@ -1,9 +1,0 @@
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
-import Calibration
-import CalibrationConfig
-import CollectCalibrationPicture
-import GenerateCalibrationPlate
-import TestCalibration
