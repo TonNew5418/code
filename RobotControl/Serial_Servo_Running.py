@@ -44,7 +44,7 @@ def setDeviation(servoId, d):
  
 def stop_servo():
     for i in range(18):
-        config_serial_servo.serial_servo_stop(i+1) 
+        config_serial_servo.serial_servo_stop(i + 1)
 
 def stop_action_group():
     global stopRunning, online_action_num, online_action_times, update_ok
