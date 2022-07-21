@@ -3,8 +3,8 @@
 import time
 import os
 import sqlite3 as sql
-import SerialServoCmd as ssc
-import config_serial_servo
+import RobotControl.SerialServoCmd as ssc
+from RobotControl import config_serial_servo
 import threading
 
 runningAction = False
