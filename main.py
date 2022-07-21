@@ -1,9 +1,11 @@
 import threading
 import time
 import cv2
+import copy
 
 from RobotControl import Serial_Servo_Running as SSR
 import running_parameters
+import levels.door as door
 
 global param_data, dim, k, d, scale, p, Knew, map1, map2, color_dict, color_range
 
@@ -65,7 +67,11 @@ def main():
     th1.start()
 
     # 启动控制线程
-    SSR.start_action_thread()
+    # SSR.start_action_thread()
+
+    # 第一关
+    door.start_door(width=320, height=240,
+                    org_img=copy.deepcopy(org_img), level=copy.deepcopy(level), color_dict=color_dict)
 
 
 if __name__ == "__main__":
