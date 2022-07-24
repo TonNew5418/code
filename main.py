@@ -67,7 +67,7 @@ def main():
     th1.start()
 
     # 启动控制线程
-    # SSR.start_action_thread()
+    SSR.start_action_thread()
 
     # 第一关
     door.start_door(width=320, height=240)
