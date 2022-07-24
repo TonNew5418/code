@@ -70,7 +70,7 @@ def main():
     SSR.start_action_thread()
 
     # 第一关
-    door.start_door(width=320, height=240)
+    door.start_door(width=320, height=240, )
 
 
 if __name__ == "__main__":
