@@ -1,11 +1,10 @@
 import threading
 import time
 import cv2
-import copy
 
 from RobotControl import Serial_Servo_Running as SSR
 import running_parameters
-import levels.first as door
+import levels.first as first
 
 global param_data, dim, k, d, scale, p, Knew, map1, map2, color_dict, color_range
 
@@ -45,9 +44,8 @@ def get_img():
                                 borderMode=cv2.BORDER_CONSTANT)
 
             if ret:
-                if not debug:
+                if debug:
                     cv2.imshow('original frame', org_img)
-                    # time.sleep(0.5)
                     time.sleep(0.6)
                     key = cv2.waitKey(3)
 
@@ -67,10 +65,15 @@ def main():
     th1.start()
 
     # 启动控制线程
-    # SSR.start_action_thread()
+    SSR.start_action_thread()
 
-    # 第一关
-    door.start_door(width=320, height=240)
+    while True:
+        time.sleep(120)
+
+        # 第一关，过杆
+        first.main(org_img=org_img, debug=debug)
+
+        # 第二关，过坑
 
 
 if __name__ == "__main__":
