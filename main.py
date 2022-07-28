@@ -5,7 +5,7 @@ import copy
 
 from RobotControl import Serial_Servo_Running as SSR
 import running_parameters
-import levels.door as door
+import levels.first as door
 
 global param_data, dim, k, d, scale, p, Knew, map1, map2, color_dict, color_range
 

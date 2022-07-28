@@ -1732,7 +1732,7 @@ def bridge(r_w, r_h):
     '''
 
     # while (state == 2 or state == 6 or state == 8) and state_sel == 'bridge':  # 初始化
-    while (True):
+    while True:
         '''
         if reset == 1:  # 是否为重置情况
             # PWMServo.setServo(1, 2100, 500) # NO2机器人，初始云台角度
