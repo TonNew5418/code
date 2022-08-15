@@ -7,9 +7,9 @@ import numpy as np
 import time
 import threading
 import math
-import Serial_Servo_Running as SSR
+import RobotControl.Serial_Servo_Running as SSR
 import signal
-import PWMServo
+#import PWMServo
 import copy
 
 from CameraCalibration.CalibrationConfig import *
@@ -1993,7 +1993,7 @@ def find_center():
         cv2.imshow("image_line1", image_copy)
 
 
-def walk_long():
+def walk_long():#实际执行的“踢球”主代码，目前的作用只是从踢球的上一关结尾走到踢球的下一关起始
     # 定死的走路
     SSR.serial_setServo(20, 400, 500)
     print("forward")
@@ -2122,7 +2122,7 @@ def walk_short():
 # 第8关：楼梯
 # 第9关：下坡
 def stairs():
-    print("stair ")
+    print("stairs")
     time_start_adjust = time.time()
     while True:
         find_center()
@@ -2135,14 +2135,14 @@ def stairs():
     time.sleep(1)
 
     # 上台阶
-#     SSR.change_action_value("star_up_one+go", 2)  # 前进
-#     time.sleep(20)
+    #     SSR.change_action_value("star_up_one+go", 2)  # 前进
+    #     time.sleep(20)
     SSR.change_action_value("star_final", 1)  # 前进
     time.sleep(13)
-    
+
     SSR.change_action_value("right_move_new_4", 2)
     time.sleep(2)
-    
+
     SSR.change_action_value("star_final", 1)  # 前进
     time.sleep(13)
 
@@ -2158,8 +2158,8 @@ def stairs():
     SSR.change_action_value("star_single_final", 1)
     time.sleep(12)
 
-    #SSR.change_action_value("go_middle_stair", 2)
-    #time.sleep(2)
+    # SSR.change_action_value("go_middle_stair", 2)
+    # time.sleep(2)
 
     SSR.change_action_value("turn_right", 1)
     time.sleep(2)
@@ -2176,15 +2176,15 @@ def stairs():
 
     SSR.change_action_value("go_middle_stair", 1)
     time.sleep(3)
-    
+
     SSR.change_action_value("1", 1)
     time.sleep(2)
-    
+
     # 下坡
     SSR.change_action_value("go_down", 10)
     time.sleep(15)
 
-    print('done')
+    print('stairs done')
 
 
 # 第9关：终点
@@ -2281,7 +2281,7 @@ def get_angle_red():
 
     (image, contours, hierarchy) = cv2.findContours(closed, cv2.RETR_LIST,
                                                     cv2.CHAIN_APPROX_NONE)  # 找出轮廓cv2.CHAIN_APPROX_NONE
-    image_filled = 255 * np.ones(closed.shape, np.uint8)  # 用于识别色块的图像
+    #image_filled = 255 * np.ones(closed.shape, np.uint8)  # 用于识别色块的图像
 
     areaMaxContour, area_max = getAreaMaxContour(contours)
     center = (1, 1)
