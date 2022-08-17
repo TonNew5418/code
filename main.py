@@ -79,25 +79,18 @@ def main():
 
     # 启动控制线程
     SSR.start_action_thread()
+    time.sleep(3)
 
-    print(org_img)
+    # test第一关，过杆
+    first.start_door()
 
-    while True:
-        time.sleep(3)
+    # flip barrier
+    # global door_count, no_door_count
+    # barrier.main(org_img=org_img)
 
-        # test第一关，过杆
-        # global door_count, no_door_count
-        # door_count, no_door_count = first.main(door_count, no_door_count,org_img=org_img, debug=debug)
-
-        # flip barrier
-        # global door_count, no_door_count
-        # barrier.main(org_img=org_img)
-
-        # 过蓝色门
-        # global door_cnt, door_end
-        # door.find_center_of_next(org_img, door_cnt, door_end)
-
-        stairs.main(org_img)
+    # 过蓝色门
+    # global door_cnt, door_end
+    # door.find_center_of_next(org_img, door_cnt, door_end)
 
 
 if __name__ == "__main__":
