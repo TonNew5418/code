@@ -5,12 +5,7 @@ import cv2
 from RobotControl import Serial_Servo_Running as SSR
 import running_parameters
 import levels.first as first
-import levels.door as door
-import levels.stairs as stairs
-import levels.barrier as barrier
-import copy
 
-# import all_together_trap_bridge_stairs_lab_changed as all
 
 global param_data, dim, k, d, scale, p, Knew, map1, map2, color_dict, color_range
 
@@ -23,10 +18,6 @@ level = 1
 debug = True
 key = -1
 istop = True
-
-# 第一关参数 #
-door_count = 0
-no_door_count = 0
 
 # 第二关参数 #
 door_cnt = 0
