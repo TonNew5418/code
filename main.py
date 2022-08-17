@@ -5,6 +5,12 @@ import cv2
 from RobotControl import Serial_Servo_Running as SSR
 import running_parameters
 import levels.first as first
+import levels.door as door
+import levels.stairs as stairs
+import levels.barrier as barrier
+import copy
+
+# import all_together_trap_bridge_stairs_lab_changed as all
 
 global param_data, dim, k, d, scale, p, Knew, map1, map2, color_dict, color_range
 
@@ -17,6 +23,14 @@ level = 1
 debug = True
 key = -1
 istop = True
+
+# 第一关参数 #
+door_count = 0
+no_door_count = 0
+
+# 第二关参数 #
+door_cnt = 0
+door_end = 0
 
 
 def initialize_parameters():
@@ -36,7 +50,7 @@ def initialize_parameters():
 
 
 def get_img():
-    global cap, org_img, ret, Running, debug, key
+    global cap, org_img, ret, Running, key
     while True:
         if cap.isOpened():
             ret, org_img_fish = cap.read()
@@ -44,10 +58,9 @@ def get_img():
                                 borderMode=cv2.BORDER_CONSTANT)
 
             if ret:
-                if debug:
-                    cv2.imshow('original frame', org_img)
-                    time.sleep(0.6)
-                    key = cv2.waitKey(3)
+                cv2.imshow('original frame', org_img)
+                time.sleep(0.6)
+                key = cv2.waitKey(3)
 
             else:
                 time.sleep(0.01)
@@ -67,13 +80,24 @@ def main():
     # 启动控制线程
     SSR.start_action_thread()
 
+    print(org_img)
+
     while True:
-        time.sleep(120)
+        time.sleep(3)
 
-        # 第一关，过杆
-        first.main(org_img=org_img, debug=debug)
+        # test第一关，过杆
+        # global door_count, no_door_count
+        # door_count, no_door_count = first.main(door_count, no_door_count,org_img=org_img, debug=debug)
 
-        # 第二关，过坑
+        # flip barrier
+        # global door_count, no_door_count
+        # barrier.main(org_img=org_img)
+
+        # 过蓝色门
+        # global door_cnt, door_end
+        # door.find_center_of_next(org_img, door_cnt, door_end)
+
+        stairs.main(org_img)
 
 
 if __name__ == "__main__":
