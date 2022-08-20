@@ -3,12 +3,11 @@ import copy
 import numpy as np
 import time
 from levels.necessary_functions import getAreaMaxContour, judge_color
-from running_parameters import r_h, r_w
+from running_parameters import r_h, r_w, lab_range
 import RobotControl.Serial_Servo_Running as SSR
 import threading
 import main
-import running_parameters
-from running_parameters import color_dict
+
 
 cap = cv2.VideoCapture(0)
 org_img = None
