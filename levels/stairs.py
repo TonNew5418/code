@@ -1,3 +1,7 @@
+
+#author: Mark Zhang
+#date: 2022.08.20
+
 import cv2
 import threading
 import numpy as np
