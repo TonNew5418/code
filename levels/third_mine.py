@@ -10,17 +10,6 @@ import threading
 import main
 
 
-cap = cv2.VideoCapture(0)
-org_img = None
-ret = False
-
-map1 = running_parameters.map1
-map2 = running_parameters.map2
-
-debug = main.debug
-isstop = main.istop
-
-
 def get_img():
     global cap, org_img, ret
     while True:
@@ -84,6 +73,9 @@ roi_mine = [(0, 80, 0, 70), (0, 80, 70, 140), (0, 80, 140, 210), (0, 80, 210, 28
 # 识别挡板的蓝色边框，判断正方向
 def get_angle(color):
     global org_img, blue_persent
+    th1 = threading.Thread(target=get_img)
+    th1.setDaemon(True)  # 设置为后台线程，这里默认是False，设置为True之后则主线程不用等待子线程
+    th1.start()
     org_img_copy = copy.copy(org_img)
     org_img_copy = cv2.resize(org_img_copy, (r_w, r_h), interpolation=cv2.INTER_CUBIC)  # 将图片缩放
     frame_gauss = cv2.GaussianBlur(org_img_copy, (3, 3), 0)  # 高斯模糊
