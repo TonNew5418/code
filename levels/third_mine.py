@@ -3,8 +3,40 @@ import copy
 import numpy as np
 import time
 from levels.necessary_functions import getAreaMaxContour, judge_color
-import running_parameters as rp
+from running_parameters import r_h, r_w
 import RobotControl.Serial_Servo_Running as SSR
+
+
+cap = cv2.VideoCapture(0)
+org_img = None
+ret = False
+
+map1 = running_parameters.map1
+map2 = running_parameters.map2
+
+debug = main.debug
+isstop = main.istop
+
+
+def get_img():
+    global cap, org_img, ret
+    while True:
+        if cap.isOpened():
+            ret, org_img_fish = cap.read()
+            org_img = cv2.remap(org_img_fish.copy(), map1, map2, interpolation=cv2.INTER_LINEAR,
+                                borderMode=cv2.BORDER_CONSTANT)
+
+            if ret:
+                cv2.imshow('original frame', org_img)
+                time.sleep(0.6)
+                cv2.waitKey(3)
+
+            else:
+                time.sleep(0.01)
+        else:
+            time.sleep(0.01)
+
+
 
 # divide the image into several parts
 roi = [(0, 80, 0, 70), (0, 80, 70, 140), (0, 80, 140, 210), (0, 80, 210, 240), (0, 80, 240, 400), (0, 80, 400, 430),
