@@ -127,10 +127,10 @@ def get_angle(color):
         return tangent_used
 
 def obscle():
+    global org_img, step, reset, move_count, forward_count, blue_persent
     th1 = threading.Thread(target=get_img)
     th1.setDaemon(True)  # 设置为后台线程，这里默认是False，设置为True之后则主线程不用等待子线程
     th1.start()
-    global org_img, step, reset, move_count, forward_count, blue_persent
     right_count = 0
     left_count = 0
     straight = False  # 直行信号
@@ -164,7 +164,7 @@ def obscle():
                 if tangent_used is not None:  # 向着蓝板转向，吧tangent_used的绝对值调整到0.07之内
                     if 1.20 > tangent_used > 0.07:
                         print("should turn left little")
-                        SSR.change_action_value("turn_left", 2)
+                        SSR.change_action_value("turn_left", 1)
                         time.sleep(0.5)
                     elif tangent_used > 1.20:
                         print("should turn left large")
@@ -172,7 +172,7 @@ def obscle():
                         time.sleep(0.5)
                     elif -0.07 > tangent_used > -1.20:
                         print("should turn right little")
-                        SSR.change_action_value("turn_right", 2)
+                        SSR.change_action_value("turn_right", 1)
                         time.sleep(0.5)
                     elif tangent_used < - 1.20:
                         print("should turn right large")
@@ -396,7 +396,9 @@ def obscle():
             print('.....................blue....',blue_persent)
             break
     time.sleep(2)
-    SSR.change_action_value("go_middle_stair", 4)  # 右移5次
+    SSR.change_action_value("go_middle_stair", 4) # 保证机器人的脚靠在挡板上 
     time.sleep(5)
+    cap.release()
     print('end of mine')
-    time.sleep(2)
+
+
